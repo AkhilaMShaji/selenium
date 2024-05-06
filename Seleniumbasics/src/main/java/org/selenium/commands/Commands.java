@@ -36,10 +36,29 @@ public class Commands {
 		WebElement GetCountryName=select.getFirstSelectedOption();
 		System.out.println(GetCountryName.getText());
 	}
+	public static void multySelectDropdown() {
+		WebDriver driver= new ChromeDriver();
+		driver.get("https://selenium.qabible.in/select-input.php");
+		driver.manage().window().maximize();
+		WebElement multipleelements=  driver.findElement(By.xpath("//select[@class='form-control'and@id='single-input-field']"));
+				Select select= new Select(multipleelements);
+				Boolean selectedvalue=select.isMultiple();
+				System.out.println(selectedvalue);
+				select.selectByVisibleText("Red");
+				select.selectByVisibleText("Yellow");
+				java.util.List<WebElement>selectedvalues= select.getAllSelectedOptions();
+				for(WebElement e:selectedvalues) {
+					System.out.println(e.getText());
+				}
+	}
+	public static void IsSelector() {
+		
+	}
 
 	public static void main(String[] args) {
 		//Verifycommunitypool();
-		verifyValuesFromDropdown();
+		//verifyValuesFromDropdown();
+		multySelectDropdown();
 	}
 	}
 
