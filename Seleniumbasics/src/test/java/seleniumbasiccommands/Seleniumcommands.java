@@ -2,6 +2,9 @@ package seleniumbasiccommands;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -40,7 +43,7 @@ public class Seleniumcommands extends BrowserLaunch {
 		WebElement lastname=driver.findElement(By.xpath("//input[@id='LastName']"));
 		lastname.sendKeys("Shaji");
 		WebElement email=driver.findElement(By.xpath("//input[@id='Email']"));
-		email.sendKeys("akhilamshaji12@gmail.com");
+		email.sendKeys("akhilamshaji@gmail.com");
 		WebElement password=driver.findElement(By.xpath("//input[@id='Password']"));
 		password.sendKeys("akhila@123");
 		WebElement cpassword=driver.findElement(By.xpath("//input[@id='ConfirmPassword']"));
@@ -49,11 +52,10 @@ public class Seleniumcommands extends BrowserLaunch {
 		register.click();
 		WebElement continuebutton = driver.findElement(By.xpath("//input[@value='Continue']"));
 		continuebutton.click();
-		WebElement auctualemailfield= driver.findElement(By.xpath("//div[@class='validation-summary-errors']"));
+		WebElement auctualemailfield= driver.findElement(By.xpath("//a[@class='account'and text()='akhilamshaji@gmail.com']"));
 		String actualresult=auctualemailfield.getText();
 		String expectedresult ="The specified email already exists";
 		Assert.assertEquals(actualresult,expectedresult,"The specified email already exists");
-		
 	}
 
 	
@@ -95,6 +97,38 @@ public class Seleniumcommands extends BrowserLaunch {
 		   Assert.assertEquals(actualresult, expectedresult,"Username valid");
 	}
 
+		@Test
+		public void validateIsSelector() {
+			boolean ismaleselected;
+			driver.get("https://demowebshop.tricentis.com/register");
+			WebElement maleradiobutton = driver.findElement(By.xpath("//input[@id='gender-male']"));
+			ismaleselected = maleradiobutton.isSelected();
+			Assert.assertFalse(ismaleselected, "Radio button is selected");
+			System.out.println("Male element before selected"+" "+ismaleselected);
+			maleradiobutton.click();
+			ismaleselected = maleradiobutton.isSelected();
+			Assert.assertTrue(ismaleselected, "Radio button is not selected");
+			System.out.println("Male element after selected"+" "+ismaleselected);
+		}
+		
+		@Test
+		public void validateButtonIsEnabled() {
+			boolean issubscribebuttonenabled;
+			driver.get("https://demowebshop.tricentis.com/");
+			WebElement subscribebutton = driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+			issubscribebuttonenabled = subscribebutton.isEnabled();
+			Assert.assertTrue(issubscribebuttonenabled, "Subscribe button is not enabled");
+			System.out.println("Subscribe button is enabled"+" "+issubscribebuttonenabled);
+			}
+		@Test
+		public void validateButtonIsDisplayed() {
+			boolean isvotebuttondisplayed;
+			driver.get("https://demowebshop.tricentis.com/");
+			WebElement votebutton = driver.findElement(By.xpath("//input[@id='vote-poll-1']"));
+			isvotebuttondisplayed = votebutton.isDisplayed();
+			Assert.assertTrue(isvotebuttondisplayed, "Vote button is not displayed");
+			System.out.println("Vote button is displayed"+" "+isvotebuttondisplayed);
+			}
 		
 		
 		

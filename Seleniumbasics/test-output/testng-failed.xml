@@ -7,7 +7,7 @@
         <methods>
           <include name="closeBrowser"/>
           <include name="setup"/>
-          <include name="demoWeb"/>
+          <include name="validateIsSelector"/>
         </methods>
       </class> <!-- seleniumbasiccommands.Seleniumcommands -->
     </classes>
