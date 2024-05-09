@@ -1,6 +1,7 @@
 package seleniumbasiccommands;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -129,10 +130,51 @@ public class Seleniumcommands extends BrowserLaunch {
 			Assert.assertTrue(isvotebuttondisplayed, "Vote button is not displayed");
 			System.out.println("Vote button is displayed"+" "+isvotebuttondisplayed);
 			}
+		@Test
+		public void verifyRightClick() {
+			driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+			WebElement rightclickbutton=driver.findElement(By.xpath("//span[@class=context-menu-one btn btn-neutral]"));
+					Actions action= new Actions(driver);
+			action.contextClick(rightclickbutton).build().perform();
+			;
+		}
+		@Test
 		
+		public void verifyDoubleClick() {
+			driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+		WebElement doubleclick=driver.findElement(By.xpath("//button[text()='Double-Click Me To See Alert']"));
+		Actions action= new Actions(driver);
+		action.doubleClick(doubleclick).build().perform();
+				}
+		@Test
 		
+		public void dragAndDrop() {
+			driver.get("https://demoqa.com/droppable");
+			WebElement drag=driver.findElement(By.xpath("//div[@id='draggable']"));
+			WebElement drop=driver.findElement(By.xpath("//div[@id='droppable']"));
+			Actions action= new Actions(driver);
+			action.dragAndDrop(drag, drop).build().perform();
+			
+		}
+		@Test
+		public void dragAndDropOffset() {
+			driver.get("https://demoqa.com/dragabble");
+			WebElement drag=driver.findElement(By.xpath("//div[@id='dragBox']"));
+			Actions action= new Actions(driver);
+			action.dragAndDropBy(drag, 150, 150).build().perform();
+		}
+		@Test
 		
-
+		public void verifyMouseOver() {
+			driver.get("https://demoqa.com/menu/");
+			WebElement mouseover=driver.findElement(By.xpath("//a[text()='Main Item 2']"));
+			Actions action= new Actions(driver);
+			action.moveToElement(mouseover).build().perform();
+			WebElement mouseover2=driver.findElement(By.xpath("//a[text()='SUB SUB LIST »']"));
+		
+			action.moveToElement(mouseover2).build().perform();
+			
+		}
 	
 	public static void verifyMultipleDropdown() {
 		WebDriver driver = new ChromeDriver();
