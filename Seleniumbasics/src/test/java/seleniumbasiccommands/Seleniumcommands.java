@@ -3,11 +3,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
 import java.util.List;
+import java.util.Set;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -133,7 +134,7 @@ public class Seleniumcommands extends BrowserLaunch {
 		@Test
 		public void verifyRightClick() {
 			driver.get("https://demo.guru99.com/test/simple_context_menu.html");
-			WebElement rightclickbutton=driver.findElement(By.xpath("//span[@class=context-menu-one btn btn-neutral]"));
+			WebElement rightclickbutton=driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
 					Actions action= new Actions(driver);
 			action.contextClick(rightclickbutton).build().perform();
 			;
@@ -175,6 +176,7 @@ public class Seleniumcommands extends BrowserLaunch {
 			action.moveToElement(mouseover2).build().perform();
 			
 		}
+		@Test
 	
 	public static void verifyMultipleDropdown() {
 		WebDriver driver = new ChromeDriver();
@@ -193,5 +195,77 @@ public class Seleniumcommands extends BrowserLaunch {
 	
 		
 	}
+	@Test
+	
+	
 
+public  void verifySimpleAlert() {
+	driver.get("https://demoqa.com/alerts");
+	WebElement clickmebutton=driver.findElement(By.xpath("//button[@id='alertButton']"));
+	clickmebutton.click();
+	Alert alert=driver.switchTo().alert();
+	alert.accept();
 }
+	@Test
+	
+	public  void verifyConfirmationAlert() {
+		driver.get("https://demoqa.com/alerts");
+		WebElement confirmbutton=driver.findElement(By.xpath("//button[@id='confirmButton']"));
+		confirmbutton.click();
+		Alert alert=driver.switchTo().alert();
+		String alert_text=alert.getText();
+		System.out.println(alert_text);
+		alert.dismiss();
+		WebElement clickcancelelement=driver.findElement(By.xpath("//span[@id='confirmResult']"));
+		String actualresult=clickcancelelement.getText();
+		String expectedresult="You selected cancel";
+		Assert.assertEquals(actualresult, expectedresult, "You selected OK");
+		
+}
+	@Test
+	
+	public  void validatePromtAlert() {
+		driver.get("https://demoqa.com/alerts");
+		WebElement promt_button=driver.findElement(By.xpath("//button[@id='promtButton']"));
+		promt_button.click();
+		Alert alert=driver.switchTo().alert();
+		String alert_text=alert.getText();
+		System.out.println(alert_text);
+		alert.sendKeys("The name is Test");
+		alert.accept();
+		WebElement textmessage_name=driver.findElement(By.xpath("//span[@id='promptResult']"));
+		String actualresult=textmessage_name.getText();
+		String expectedresult="You entered name is test";
+		Assert.assertEquals(actualresult, expectedresult, "You have not entered a text");
+	}
+	@Test
+	
+	public void verifyMultipleWindowHandling() 
+	    { 
+	       driver.get("https://demo.guru99.com/popup.php"); 
+	       String parentwindow_handleid = 	driver.getWindowHandle(); 
+	       System.out.println(parentwindow_handleid); 
+	       WebElement click_button = driver.findElement(By.xpath("//a[@target='_blank'and text()='Click Here']")); 
+	       click_button.click(); 
+	       Set<String> windowshandlesid = driver.getWindowHandles(); 
+	       System.out.println(windowshandlesid); 
+	       Iterator <String> values = windowshandlesid.iterator();//  
+	       while(values.hasNext())// return type boolean 
+	       { 
+	    	String handleid = values.next(); 
+	    	if(!handleid.equals(parentwindow_handleid))  
+	    	 { 
+	    		WebElement emailid = driver.findElement(By.xpath("//input[@name='emailid']")); 
+	    		emailid.sendKeys("abc@gmail.com"); 
+	    		WebElement submit_button = driver.findElement(By.xpath("//input[@name='btnLogin']")); 
+	    		submit_button.click(); 
+	    		driver.close(); 
+	    		 
+	    	 } 
+	      } 
+	       driver.switchTo().window(parentwindow_handleid); 
+	    } 
+}
+		
+	
+

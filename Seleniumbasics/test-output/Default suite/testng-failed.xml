@@ -6,8 +6,8 @@
       <class name="seleniumbasiccommands.Seleniumcommands">
         <methods>
           <include name="closeBrowser"/>
-          <include name="verifyMouseOver"/>
           <include name="setup"/>
+          <include name="verifySimpleAlert"/>
         </methods>
       </class> <!-- seleniumbasiccommands.Seleniumcommands -->
     </classes>
