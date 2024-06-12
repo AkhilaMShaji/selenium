@@ -15,7 +15,7 @@ System.out.println("title is"+title);
 String currenturl=driver.getCurrentUrl();
 System.out.println(" current url is "+currenturl);
 String windowhandle=driver.getCurrentUrl();
-System.out.println("Current url is"+currenturl);
+System.out.println("windowhandle id is"+windowhandle);
 String pagesource=driver.getPageSource();
 System.out.println("page source is"+pagesource);
 driver.close();

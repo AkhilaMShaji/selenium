@@ -19,7 +19,7 @@ public void Validdemowebshop() {
 	loginButton.click();
 	driver.close();
 }
-	 public void TotalNumberofTagesinApplication() {
+	 public static void TotalNumberofTagesinApplication() {
 		    WebDriver driver = new ChromeDriver();
 		    driver.get("https://demowebshop.tricentis.com/");
 		    driver.manage().window().maximize();
@@ -30,7 +30,7 @@ public void Validdemowebshop() {
 		    }
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//TotalNumberofTagesinApplication();
 		ValidDemoWebshop obj= new ValidDemoWebshop();
 		obj.Validdemowebshop();
 	}

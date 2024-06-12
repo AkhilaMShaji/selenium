@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Functional Test]" guice-stage="DEVELOPMENT">
+<suite name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Functional Test(failed)">
-    <parameter name="browser" value="Chrome"/>
     <groups>
       <run>
         <include name="Regression"/>
@@ -10,22 +9,22 @@
       </run>
     </groups>
     <classes>
+      <class name="test.HomepageTest">
+        <methods>
+          <include name="verifyHomePageTitle"/>
+        </methods>
+      </class> <!-- test.HomepageTest -->
+      <class name="test.LoginPageTest">
+        <methods>
+          <include name="verifyLoginPageTitle"/>
+        </methods>
+      </class> <!-- test.LoginPageTest -->
       <class name="test.RegistrationPageTest">
         <methods>
           <include name="verifyRegisterPageTitle"/>
           <include name="verifyUserRegistration"/>
         </methods>
       </class> <!-- test.RegistrationPageTest -->
-      <class name="test.LoginPageTest">
-        <methods>
-          <include name="verifyLoginPageTitle"/>
-        </methods>
-      </class> <!-- test.LoginPageTest -->
-      <class name="test.HomepageTest">
-        <methods>
-          <include name="verifyHomePageTitle"/>
-        </methods>
-      </class> <!-- test.HomepageTest -->
     </classes>
   </test> <!-- Functional Test(failed) -->
-</suite> <!-- Failed suite [Functional Test] -->
+</suite> <!-- Failed suite [All Test Suite] -->

@@ -56,9 +56,9 @@ public class Commands {
 	}
 
 	public static void main(String[] args) {
-		//Verifycommunitypool();
+		Verifycommunitypool();
 		//verifyValuesFromDropdown();
-		multySelectDropdown();
+		//multySelectDropdown();
 	}
 	}
 

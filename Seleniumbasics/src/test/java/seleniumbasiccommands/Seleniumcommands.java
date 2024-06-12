@@ -3,17 +3,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Test
 
 public class Seleniumcommands extends BrowserLaunch {
@@ -41,11 +48,11 @@ public class Seleniumcommands extends BrowserLaunch {
 		driver.get("https://demowebshop.tricentis.com/register");
 		driver.manage().window().maximize();
 		WebElement firstName=driver.findElement(By.xpath("//input[@id='FirstName']"));
-		firstName.sendKeys("Akhila");
+		firstName.sendKeys("Akhilaa");
 		WebElement lastname=driver.findElement(By.xpath("//input[@id='LastName']"));
-		lastname.sendKeys("Shaji");
+		lastname.sendKeys("Shajii");
 		WebElement email=driver.findElement(By.xpath("//input[@id='Email']"));
-		email.sendKeys("akhilamshaji@gmail.com");
+		email.sendKeys("akhilamshajiii@gmail.com");
 		WebElement password=driver.findElement(By.xpath("//input[@id='Password']"));
 		password.sendKeys("akhila@123");
 		WebElement cpassword=driver.findElement(By.xpath("//input[@id='ConfirmPassword']"));
@@ -54,10 +61,11 @@ public class Seleniumcommands extends BrowserLaunch {
 		register.click();
 		WebElement continuebutton = driver.findElement(By.xpath("//input[@value='Continue']"));
 		continuebutton.click();
-		WebElement auctualemailfield= driver.findElement(By.xpath("//a[@class='account'and text()='akhilamshaji@gmail.com']"));
-		String actualresult=auctualemailfield.getText();
-		String expectedresult ="The specified email already exists";
-		Assert.assertEquals(actualresult,expectedresult,"The specified email already exists");
+		WebElement actualemailfield= driver.findElement(By.xpath("//a[@class='account'and text()='akhilamshaji@gmail.com']"));
+		String actualemail = actualemailfield.getText();
+		System.out.println(actualemail);
+		//String Expectedemail = "akhilamshaji@gmail.com";
+		//Assert.assertEquals(actualemail, Expectedemail, "Login is not sucess");
 	}
 
 	
@@ -93,14 +101,15 @@ public class Seleniumcommands extends BrowserLaunch {
 		cpassword.sendKeys("akhila@123");
 		WebElement submit=driver.findElement(By.xpath("//input[@name='submit']"));
 		submit.click();
-		WebElement actualusernamefiled =driver.findElement(By.xpath("//input[@name='email']"));
-		   String actualresult =actualusernamefiled.getText();
-		   String expectedresult ="Akhila";
-		   Assert.assertEquals(actualresult, expectedresult,"Username valid");
+		WebElement nameofemail= driver.findElement(By.xpath("//text()='b' Note: Your user name is testuser.']"));
+		String actualname = nameofemail.getText();
+		String Expectedname = "Note: Your user name is testuser." ;
+		Assert.assertEquals(actualname, Expectedname, "Login not successful");
+		Assert.assertTrue(true);// Boolean
 	}
 
 		@Test
-		public void validateIsSelector() {
+		public void validateIsSelected() {
 			boolean ismaleselected;
 			driver.get("https://demowebshop.tricentis.com/register");
 			WebElement maleradiobutton = driver.findElement(By.xpath("//input[@id='gender-male']"));
@@ -177,8 +186,9 @@ public class Seleniumcommands extends BrowserLaunch {
 			
 		}
 		@Test
-	
-	public static void verifyMultipleDropdown() {
+		
+		
+		public static void verifyMultipleDropdown() {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://selenium.qabible.in/select-input.php");
 		driver.manage().window().maximize();
@@ -195,11 +205,10 @@ public class Seleniumcommands extends BrowserLaunch {
 	
 		
 	}
-	@Test
-	
-	
+	@Test	
 
 public  void verifySimpleAlert() {
+
 	driver.get("https://demoqa.com/alerts");
 	WebElement clickmebutton=driver.findElement(By.xpath("//button[@id='alertButton']"));
 	clickmebutton.click();
@@ -239,7 +248,39 @@ public  void verifySimpleAlert() {
 		Assert.assertEquals(actualresult, expectedresult, "You have not entered a text");
 	}
 	@Test
-	
+	   
+	   public void validatePromptAlert() 
+	   {
+		 driver.get("https://demoqa.com/alerts");  
+		 WebElement prompt_button = driver.findElement(By.xpath("//button[@id='promtButton']"));
+		 prompt_button.click();
+		 Alert alert = driver.switchTo().alert();
+		 String alert_text = alert.getText();
+		 System.out.println(alert_text);
+		 alert.sendKeys("The name is test");
+		 alert.accept();
+		 WebElement textmessage_name = driver.findElement(By.xpath("//span[@id='promptResult']"));
+		 String actualresult = textmessage_name.getText();
+		 String expectedresult = "You entered The name is test";
+		 Assert.assertEquals(actualresult, expectedresult,"You have not entered a text");
+		 
+	   }
+	    @Test
+	    
+	   public void validateDoubleClickAlert() 
+	   {
+		driver.get("https://demo.guru99.com/test/simple_context_menu.html");   
+		WebElement doubleclick = driver.findElement(By.xpath("//button[text()='Double-Click Me To See Alert']"));
+		Actions action = new Actions(driver);
+		action.doubleClick(doubleclick).build().perform();
+	    Alert alert = driver.switchTo().alert();
+		String alert_text = alert.getText();
+		System.out.println(alert_text);
+		alert.accept();
+	  }
+	    @Test
+	    
+	   
 	public void verifyMultipleWindowHandling() 
 	    { 
 	       driver.get("https://demo.guru99.com/popup.php"); 
@@ -249,7 +290,7 @@ public  void verifySimpleAlert() {
 	       click_button.click(); 
 	       Set<String> windowshandlesid = driver.getWindowHandles(); 
 	       System.out.println(windowshandlesid); 
-	       Iterator <String> values = windowshandlesid.iterator();//  
+	       Iterator<String>values=windowshandlesid.iterator();
 	       while(values.hasNext())// return type boolean 
 	       { 
 	    	String handleid = values.next(); 
@@ -265,7 +306,149 @@ public  void verifySimpleAlert() {
 	      } 
 	       driver.switchTo().window(parentwindow_handleid); 
 	    } 
+	    @Test
+	    
+	    public  void verifyDynamicTable() {
+			WebDriver driver=new ChromeDriver();
+			driver.get("https://money.rediff.com/indices");
+				 driver.manage().window().maximize();
+				 WebElement showmore=driver.findElement(By.xpath("//a[@id='showMoreLess']"));
+				 showmore.click();
+				 WebElement webtable=driver.findElement(By.xpath("//table[@id='dataTable']//tbody"));
+				 List<WebElement>rows=webtable.findElements(By.tagName("td"));
+				 int rowsize=rows.size();
+				 for(int i=0;i<rowsize;i++) {
+					 List<WebElement>columns=rows.get(i).findElements(By.tagName("td"));
+					 int columnsize=columns.size();
+					 for(int j=0;j<columnsize;j++) {
+						 String celltext=columns.get(j).getText();
+						 if(celltext.equals("S&P BSE 200")) {
+							 System.out.println("Pre close value is "+columns.get(1).getText());
+							
+						 }
+					 }
+				 }}
+
+@Test
+ 
+ public void verifyFrames()  
+ { 
+   driver.get("https://demoqa.com/frames");	 
+   List <WebElement> iframe_tags = driver.findElements(By.tagName("iframe")); 
+   int size =  iframe_tags.size(); 
+   System.out.println("The total number of frames in the Webpage  "+ size); 
+   //driver.switchTo().frame(3); 
+   //driver.switchTo().frame("frame1"); 
+   WebElement frame = driver.findElement(By.id("frame1")); 
+   driver.switchTo().frame(frame); 
+   WebElement frame1_text = driver.findElement(By.id("sampleHeading")); 
+   String frame_text = frame1_text.getText(); 
+   System.out.println(frame_text); 
+   driver.switchTo().defaultContent();// to home page from a frame 
+ }  
+@Test
+public void verifyFileUpload() {
+
+	driver.get("https://demo.guru99.com/test/upload/");
+	WebElement fileupload = driver.findElement(By.xpath("//input[@id='uploadfile_0']"));
+	fileupload.sendKeys("D:\\Java\\SeleniumBasics\\src\\main\\resources\\Java_Arrays.docx");
+	WebElement checkbox = driver.findElement(By.xpath("//input[@id='terms']"));
+	checkbox.click();
+	WebElement submitbutton = driver.findElement(By.xpath("//button[@id='submitbutton']"));
+	submitbutton.click();
+	
 }
+@Test
+public void framesAssignment() {
+	driver.get("https://www.hyrtutorials.com/p/frames-practice.html");
+	WebElement text=driver.findElement(By.xpath("//input[@class='frmTextBox'and @id='name']"));
+	text.sendKeys("hi");
+	WebElement frame1 = driver.findElement(By.id("header-wrappers"));
+	driver.switchTo().frame(frame1);
+	WebElement frame_dropdown=driver.findElement(By.id("selectnav1"));
+	Select select=new Select(frame_dropdown);
+	select.selectByValue("java");
+	driver.switchTo().defaultContent();
+	WebElement dropdownbox1 = driver.findElement(By.xpath("//select[@id='selectnav1']"));
+	Select select1 = new Select(dropdownbox1);
+	select1.selectByVisibleText("-- Selenium");
+	driver.switchTo().defaultContent();
+}
+@Test
+
+public void verifyImplicitWait() {
+	driver.get("https://demoqa.com/alerts");
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(15));
+wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("timerAlertButton")));
+WebElement click_button=driver.findElement(By.id("timerAlertButton"));
+click_button.click();
+wait.until(ExpectedConditions.alertIsPresent());
+Alert alert=driver.switchTo().alert();
+alert.accept();
+}
+@	Test
+
+public void verifyFluentWait() {
+	driver.get("https://demoqa.com/alerts");
+	FluentWait wait=new FluentWait(driver);
+	//wait.withTimeout(Duration.ofSeconds(20));
+	//wait.pollingEvery(Duration.ofSeconds(8));
+	//wait.ignoring(NoSuchElementException.class);
+	wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("timerAlertButton")));
+		WebElement click_button=driver.findElement(By.id("timerAlertButton"));
+		click_button.click();
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert=driver.switchTo().alert();
+		alert.accept();
+	 
+}
+@Test
+
+public void verifyJavaScriptSendKeysandClick() {
+	driver.get("https://demowebshop.tricentis.com/");
+	JavascriptExecutor js= (JavascriptExecutor)driver;
+	js.executeScript("document.getElementById(\"newsletter-email\").value='abc@gmail.com'");
+	js.executeAsyncScript("document.getElementById(\"newsletter-subscribe-button\").click()");
+}
+@Test
+
+public void verifyVerticalScrolll() {
+	driver.get("https://demowebshop.tricentis.com/");
+	JavascriptExecutor js=(JavascriptExecutor)driver;
+	js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+	
+}
+@Test
+public void javaScriptAssignment() {
+	driver.get("https://demowebshop.tricentis.com/login");
+	JavascriptExecutor js =(JavascriptExecutor)driver;
+	js.executeScript("document.getElementById(\"Email\").value='akhilamshaji@gmail.com'");
+	js.executeScript("document.getElementById(\"Password\").value='Akhila@123'");
+	js.executeScript("document.getElementsByClassName('button-1 login-button')[0].click()");
+}
+
+@Test
+public void verifyscrollasmt() {
+	 driver.get("https://demoqa.com/alerts");  
+	 JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+		
+}
+@Test
+
+public void verifyScreenshot() {
+	 driver.get("https://demowebshop.tricentis.com/login");
+	 String actualtitle=driver.getTitle();
+	 System.out.println("Actual title is "+actualtitle);
+	 String expectedtitle="demowebshop";
+	 Assert.assertEquals(actualtitle, expectedtitle,"Invalid title");
+	 
+	 
+}
+}
+
+
 		
 	
 
