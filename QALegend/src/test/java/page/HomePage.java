@@ -16,7 +16,7 @@ WebElement headercontent;
 @FindBy(xpath="//section[@class='content-header']")
 WebElement welcome_user;
 
-@FindBy(xpath="//i[@class='fa fa-calculator fa-lg']")
+@FindBy(xpath="//div[@class='m-8 pull-left mt-15 hidden-xs']")
 WebElement date;
 @FindBy(xpath="//span[@class='title']")
 WebElement usermanagementfield;

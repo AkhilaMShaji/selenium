@@ -16,7 +16,6 @@ public class User  {
 	@FindBy(xpath="//input[@class='form-control input-sm']")
 	WebElement searchfield;
 	@FindBy(xpath ="//a[@class='btn btn-block btn-primary']")
-    //WebElement add_button;
 	WebElement addbutton;
 	@FindBy(xpath="//input[@id='first_name']")
 	WebElement firstname;
